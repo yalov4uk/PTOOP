@@ -7,6 +7,8 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class Parallelogram extends Rectangle {
 
+  private static final long serialVersionUID = 1L;
+
   private int angle;
 
   public Parallelogram(Vector vector, int width, int height, int angle) {

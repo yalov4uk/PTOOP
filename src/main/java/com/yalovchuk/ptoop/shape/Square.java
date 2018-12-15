@@ -7,6 +7,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class Square implements Shape {
 
+  private static final long serialVersionUID = 1L;
+
   private Vector vector;
   private int length;
 }

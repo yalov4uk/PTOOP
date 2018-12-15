@@ -1,9 +1,8 @@
 package com.yalovchuk.ptoop;
 
 import com.yalovchuk.ptoop.shape.Shape;
+import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class UserExperience {
 
@@ -19,16 +18,27 @@ public class UserExperience {
     active = shapeManager.getOptions().get(option);
   }
 
-  public Shape create() {
-    return shapeManager.create(active);
+  public Shape generate() {
+    return shapeManager.generate(active);
+  }
+
+  public void create(Shape shape) {
+    shapeManager.create(shape);
+  }
+
+  public List<Shape> readAll() {
+    return shapeManager.readAll();
+  }
+
+  public void update(int i, Shape shape) {
+    shapeManager.update(i, shape);
+  }
+
+  public void delete(int i) {
+    shapeManager.delete(i);
   }
 
   public void draw(Shape shape) {
     shapeManager.draw(active, shape);
-  }
-
-  public void addNewShape(Class<? extends Shape> option, Supplier<Shape> creator,
-      Consumer<Shape> drawer) {
-    shapeManager.add(option, creator, drawer);
   }
 }

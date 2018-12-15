@@ -10,6 +10,7 @@ import com.yalovchuk.ptoop.shape.Shape;
 import com.yalovchuk.ptoop.shape.Square;
 import com.yalovchuk.ptoop.shape.Vector;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Consumer;
@@ -19,6 +20,7 @@ import lombok.Getter;
 public class ShapeManager {
 
   private static final Scanner scanner = new Scanner(System.in);
+  private final ShapeHolder shapeHolder = new ShapeHolder();
   @Getter
   private final Map<Integer, Class<? extends Shape>> options = new HashMap<>();
   private final Map<Class<? extends Shape>, Supplier<Shape>> creators = new HashMap<>();
@@ -30,7 +32,23 @@ public class ShapeManager {
     defaultInit();
   }
 
-  public Shape create(Class<? extends Shape> shapeClass) {
+  public void create(Shape shape) {
+    shapeHolder.create(shape);
+  }
+
+  public List<Shape> readAll() {
+    return shapeHolder.getShapes();
+  }
+
+  public void update(int i, Shape shape) {
+    shapeHolder.update(i, shape);
+  }
+
+  public void delete(int i) {
+    shapeHolder.delete(i);
+  }
+
+  public Shape generate(Class<? extends Shape> shapeClass) {
     return creators.get(shapeClass).get();
   }
 
@@ -38,7 +56,7 @@ public class ShapeManager {
     drawers.get(shapeClass).accept(shape);
   }
 
-  public void add(Class<? extends Shape> option, Supplier<Shape> creator,
+  public void addNewShapeClass(Class<? extends Shape> option, Supplier<Shape> creator,
       Consumer<Shape> drawer) {
     creators.put(option, creator);
     drawers.put(option, drawer);

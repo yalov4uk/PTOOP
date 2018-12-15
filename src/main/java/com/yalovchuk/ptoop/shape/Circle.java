@@ -7,6 +7,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class Circle implements Shape {
 
+  private static final long serialVersionUID = 1L;
+
   private Point center;
   private int radius;
 }

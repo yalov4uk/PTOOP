@@ -1,5 +1,7 @@
 package com.yalovchuk.ptoop.shape;
 
-public interface Shape {
+import java.io.Serializable;
+
+public interface Shape extends Serializable {
 
 }
