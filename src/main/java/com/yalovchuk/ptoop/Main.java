@@ -1,30 +1,23 @@
 package com.yalovchuk.ptoop;
 
-import com.yalovchuk.ptoop.shape.Circle;
-import com.yalovchuk.ptoop.shape.Ellipse;
-import com.yalovchuk.ptoop.shape.Parallelogram;
-import com.yalovchuk.ptoop.shape.Point;
-import com.yalovchuk.ptoop.shape.Rectangle;
-import com.yalovchuk.ptoop.shape.Segment;
 import com.yalovchuk.ptoop.shape.Shape;
-import com.yalovchuk.ptoop.shape.Square;
-import com.yalovchuk.ptoop.shape.Vector;
-import java.util.Arrays;
+import java.util.Scanner;
 
 public class Main {
 
   public static void main(String[] args) {
-    ShapeHolder shapeHolder = new ShapeHolder();
-    shapeHolder.setShapes(Arrays.asList(
-        new Circle(new Point(1, 2), 3),
-        new Ellipse(new Vector(new Point(1, 2), 3), 4, 5),
-        new Parallelogram(new Vector(new Point(1, 2), 3), 4, 5, 6),
-        new Rectangle(new Vector(new Point(1, 2), 3), 4, 5),
-        new Segment(new Vector(new Point(1, 2), 3), 4),
-        new Square(new Vector(new Point(1, 2), 3), 4)
-    ));
-    for (Shape shape : shapeHolder.getShapes()) {
-      shape.draw();
+    Scanner scanner = new Scanner(System.in);
+    UserExperience userExperience = new UserExperience();
+    while (true) {
+      System.out.println("1. Tap a number and choose shape");
+      System.out.println(userExperience.getOptions());
+      userExperience.activate(Integer.parseInt(scanner.nextLine()));
+
+      System.out.println("2. Create chose shape");
+      Shape shape = userExperience.create();
+
+      System.out.println("3. Draw created shape");
+      userExperience.draw(shape);
     }
   }
 }
