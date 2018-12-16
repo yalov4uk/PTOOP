@@ -39,7 +39,7 @@ public class Main {
           userExperience.delete(Integer.parseInt(scanner.nextLine()));
           break;
         case 5:
-          userExperience.addModule(new URL[]{new File(defaultPathToModules).toURI().toURL()},
+          userExperience.addPlugin(new URL[]{new File(defaultPathToModules).toURI().toURL()},
               scanner.nextLine(), scanner.nextLine(), scanner.nextLine());
           break;
         case 6:

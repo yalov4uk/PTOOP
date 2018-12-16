@@ -13,9 +13,15 @@ import java.util.List;
 import lombok.Getter;
 import lombok.extern.java.Log;
 
+/**
+ * This class is responsible for holding shapes in file.
+ */
 @Log
 public class ShapeHolder {
 
+  /**
+   * Default filename pattern.
+   */
   private static final String FILENAME =
       "src" + separator + "main" + separator + "resources" + separator + "shapes-%s.bin";
 
@@ -34,6 +40,11 @@ public class ShapeHolder {
     shapes.remove(i);
   }
 
+  /**
+   * Load shapes from file using {@code FILENAME} pattern and postfix arg. Binary deserialization.
+   *
+   * @param postfix - postfix, for most cases current date in nano.
+   */
   @SuppressWarnings("unchecked")
   public void load(String postfix) {
     try (FileInputStream fileInputStream = new FileInputStream(String.format(FILENAME, postfix));
@@ -44,6 +55,10 @@ public class ShapeHolder {
     }
   }
 
+  /**
+   * Save shapes to file with file name {@code FILENAME} + current time in nano. Binary
+   * Serialization.
+   */
   public void save() {
     try (FileOutputStream fileOutputStream = new FileOutputStream(
         String.format(FILENAME, System.nanoTime()));
