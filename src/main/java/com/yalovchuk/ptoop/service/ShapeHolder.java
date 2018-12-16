@@ -17,14 +17,26 @@ import lombok.extern.java.Log;
 public class ShapeHolder {
 
   private static final String FILENAME =
-      "src" + separator + "main" + separator + "resources" + separator + "shapes.bin";
+      "src" + separator + "main" + separator + "resources" + separator + "shapes-%s.bin";
 
   @Getter
   private List<Shape> shapes = new ArrayList<>();
 
+  public void create(Shape shape) {
+    shapes.add(shape);
+  }
+
+  public void update(int i, Shape shape) {
+    shapes.set(i, shape);
+  }
+
+  public void delete(int i) {
+    shapes.remove(i);
+  }
+
   @SuppressWarnings("unchecked")
-  public ShapeHolder() {
-    try (FileInputStream fileInputStream = new FileInputStream(FILENAME);
+  public void load(String postfix) {
+    try (FileInputStream fileInputStream = new FileInputStream(String.format(FILENAME, postfix));
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
       shapes = (List<Shape>) objectInputStream.readObject();
     } catch (IOException | ClassNotFoundException e) {
@@ -32,23 +44,9 @@ public class ShapeHolder {
     }
   }
 
-  public void create(Shape shape) {
-    shapes.add(shape);
-    save();
-  }
-
-  public void update(int i, Shape shape) {
-    shapes.set(i, shape);
-    save();
-  }
-
-  public void delete(int i) {
-    shapes.remove(i);
-    save();
-  }
-
-  private void save() {
-    try (FileOutputStream fileOutputStream = new FileOutputStream(FILENAME);
+  public void save() {
+    try (FileOutputStream fileOutputStream = new FileOutputStream(
+        String.format(FILENAME, System.nanoTime()));
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
       objectOutputStream.writeObject(shapes);
       objectOutputStream.flush();

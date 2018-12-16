@@ -19,7 +19,8 @@ public class Main {
     Scanner scanner = new Scanner(System.in);
     UserExperience userExperience = new UserExperience();
     while (true) {
-      log.info("1 - view, 2- add and draw, 3- update, 4 - delete, 5 - add module, other - exit");
+      log.info("1 - view, 2- add and draw, 3- update, 4 - delete, 5 - add module, 6 - load, "
+          + "7 - save, other - exit");
       switch (Integer.parseInt(scanner.nextLine())) {
         case 1:
           log.info(userExperience.readAll().toString());
@@ -40,6 +41,12 @@ public class Main {
         case 5:
           userExperience.addModule(new URL[]{new File(defaultPathToModules).toURI().toURL()},
               scanner.nextLine(), scanner.nextLine(), scanner.nextLine());
+          break;
+        case 6:
+          userExperience.load(scanner.nextLine());
+          break;
+        case 7:
+          userExperience.save();
           break;
         default:
           return;

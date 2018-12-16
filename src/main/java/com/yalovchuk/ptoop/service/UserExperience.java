@@ -47,4 +47,12 @@ public class UserExperience {
   public void delete(int i) {
     shapeHolder.delete(i);
   }
+
+  public void load(String postfix) {
+    shapeHolder.load(postfix);
+  }
+
+  public void save() {
+    shapeHolder.save();
+  }
 }
