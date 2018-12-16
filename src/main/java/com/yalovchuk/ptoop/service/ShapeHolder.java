@@ -1,4 +1,6 @@
-package com.yalovchuk.ptoop;
+package com.yalovchuk.ptoop.service;
+
+import static java.io.File.separator;
 
 import com.yalovchuk.ptoop.shape.Shape;
 import java.io.FileInputStream;
@@ -14,11 +16,13 @@ import lombok.extern.java.Log;
 @Log
 public class ShapeHolder {
 
-  private static final String FILENAME = "src/main/resources/shapes.bin";
+  private static final String FILENAME =
+      "src" + separator + "main" + separator + "resources" + separator + "shapes.bin";
 
   @Getter
   private List<Shape> shapes = new ArrayList<>();
 
+  @SuppressWarnings("unchecked")
   public ShapeHolder() {
     try (FileInputStream fileInputStream = new FileInputStream(FILENAME);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
